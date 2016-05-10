@@ -1,0 +1,25 @@
+void* Memmove(void* dest, const void* src, size_t count)
+{
+	assert(dest&&src);
+	void* ret = dest;
+	char* pdest = (char*)dest;
+	char* psrc = (char*)src;
+
+	if (psrc + count > pdest && psrc < pdest)
+	{
+		while (count--)
+		{
+			*(pdest + count) = *(psrc + count);
+		}
+	}
+	else
+	{
+		while (count--)
+		{
+			*pdest = *psrc;
+			pdest++;
+			psrc++;
+		}
+	}
+	return ret;
+}
