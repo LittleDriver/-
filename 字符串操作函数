@@ -1,0 +1,164 @@
+
+
+//strlen strcat strcpy strcmp strstr
+//求字符串的的长度
+
+size_t Strlen(const char* str)    //size_t strlen(const char* string);
+{
+	size_t size = 0;
+	while (*str)
+	{
+		size++;
+		str++;
+	}
+	return size;
+}
+
+int main()
+{
+	char* str = "abcdef";
+	cout << Strlen(str) << endl;
+	system("pause");
+	return 0;
+}
+
+
+//字符串追加strcat
+
+char* Strcat(char* dest,const char* src)
+{
+	assert(src && dest);
+	char* ret = dest;    //----为什么要加这一句？
+	while (*dest)
+	{
+		dest++;
+	}
+
+	while (*src)
+	{
+		*dest = *src;
+		src++;
+		dest++;
+	}
+
+	return ret;
+}
+
+
+int main()
+{
+	char str1[20] = "welcome";
+	char str2[] = " to xian";
+	Strcat(str1, str2);
+	printf("%s", str1);
+	system("pause");
+	return 0;
+}
+
+
+//字符串拷贝strcpy                     -------------------------------------
+
+
+char* Strcpy(char* dest, const char* src)
+{
+	assert(dest&&src);
+	char *ret = dest;
+	while (*src)
+	{
+		*dest = *src;
+		dest++;
+		src++;
+	}
+	*dest = '\0';
+	return ret;
+}
+
+int main()
+{
+	char str1[10];
+	char str2[] = "abcdef";
+	Strcpy(str1, str2);
+	printf("%s\n", str1);
+	system("pause");
+	return 0;
+}
+
+
+
+//字符串比较函数strcmp            -----------------------------------------
+
+int Strcmp(const char* dest, const char* src)
+{
+	assert(dest&&src);
+	while (*dest == *src)
+	{
+		if (*src == '\0')
+		{
+			return 0;
+		}
+		dest++;
+		src++;
+	}
+	return *dest - *src;
+}
+
+int main()
+{
+	char* str1 = "abcdef";
+	char* str2 = "abcdef";
+	cout << Strcmp(str1, str2) << endl;
+	system("pause");
+	return 0;
+}
+
+
+//字符串比较函数strstr               -------------------------------------------
+
+
+char* Strstr(const char* dest, const char* src)   //dest->源字符串  src->子串
+{
+	assert(dest);
+	assert(src);
+	if (*src == '\0')   
+	{
+		return (char*)dest;
+	}
+
+	char* pdest = (char*)dest;
+	char* psrc = (char*)src;
+	char* tmp = NULL;
+
+	while (*pdest && *psrc)
+	{
+		tmp = pdest;
+
+		while ((*pdest == *psrc && *psrc))
+		{
+			pdest++;
+			psrc++;
+		}
+
+		if (*psrc == '\0')
+		{
+			return tmp;
+		}
+		else
+		{
+			psrc = (char*)src;
+			pdest = tmp;
+			pdest++;
+		}
+	}
+	return NULL;
+}
+
+
+int main()
+{
+	char* str1 = "abcdef";
+	char* str2 = "cfd";
+	char* ret = Strstr(str1, str2);
+	printf("%s", ret);
+	system("pause");
+	return 0;
+}
